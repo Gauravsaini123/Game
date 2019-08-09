@@ -1,0 +1,79 @@
+# making CMS using OOPS
+
+#BLL
+class customer: 
+    custlist=[ ]    #static variable
+    def __init__(self):
+        self.id=0
+        self.age=0
+        self.name=0
+    def addCustomer(self):
+        customer.custlist.append(self)
+    def searchCustomer(self):
+        for i in customer.custlist:
+            if(i.id==self.id):
+                self.age=i.age
+                self.name=i.name
+                return 1
+        return 0
+    @staticmethod
+    def delCustomer(id):
+        for i in customer.custlist:
+            if(i.id==id):
+                customer.custlist.remove(i)
+                return 1
+        return 0
+    def modCustomer(self):
+        for i in customer.custlist:
+            if(i.id==self.id):
+                i.age=self.age
+                i.name=self.name
+                return 1
+        return 0
+
+#PL
+def showCustomer(ob):
+    print('Your ID =',ob.id,'    Your age=',ob.age,'    Your name =',ob.name)
+print('-----WELCOME TO CUSTOMER MANAGEMENT SYSTEM-----')
+while(1):
+    print('press \n 1. To add customer\n 2. To search customer\n 3. To delete customer\n 4. To modify customer \n 5. To display all \n 6. Exit')
+    ch=int(input('Enter your choice ='))
+    if(ch==1):    # add customer
+        ob=customer()
+        ob.id=input('Enter your ID =')
+        ob.age=input('Enter your age =')
+        ob.name=input('Enter your name =')
+        ob.addCustomer()
+        print('-----Customer added successfully-----')
+    elif(ch==2):    # search customer
+        ob=customer()
+        ob.id=input('Enter the ID =')
+        flag=ob.searchCustomer()
+        if(flag==1):
+            showCustomer(ob)
+        else:
+            print('-----Customer with given ID not found-----')
+    elif(ch==3):    # delete customer
+        id=input('Enter the ID =')
+        flag=customer.delCustomer(id)
+        if(flag==1):
+            print('-----Customer deleted successfully-----')
+        else:
+            print('-----Given ID not found-----')
+    elif(ch==4):    # modify customer
+        ob=customer()
+        ob.id=input('Enter your ID =')
+        ob.age=input('Enter updated age =')
+        ob.name=input('Enter updated name =')
+        flag=ob.modCustomer()
+        if(flag==1):
+            print('-----Customer modified successfully-----')
+        else:
+            print('-----Given ID not found-----')
+    elif(ch==5):    # display all
+        for i in customer.custlist:
+            showCustomer(i)
+    elif(ch==6):    #exit
+        break
+    else:
+        print('-----Invalid Entry-----')

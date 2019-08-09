@@ -1,0 +1,123 @@
+# employee resource planning (cetpa method)
+
+#BLL
+class employee:
+    emplist=[ ]
+    def __init__(self):
+        self.id=0
+        self.age=0
+        self.name=0
+    def add(self):
+        employee.emplist.append(self)
+        print(employee.emplist)
+    @staticmethod
+    def search(id):
+        for i in employee.emplist:
+            if(i.id==id):
+                return i
+    @staticmethod
+    def delete(id):
+        for i in employee.emplist:
+            if (i.id == id):
+                employee.emplist.remove(i)
+                return 1
+        return 0
+    @staticmethod
+    def modify(id):
+        for i in employee.emplist:
+            if (i.id == id):
+                return i
+    def delete(self):
+
+class manager(employee):
+    def __init__(self):
+        self.number=0
+        self.area=0
+        super().__init__()
+    def addmanager(self):
+        super().add()
+    def delmanager(self):
+        super.delete()
+class trainer(employee):
+    def __init__(self):
+        self.course=0
+        super().__init__()
+    def addtrainer(self):
+        super().add()
+class director(employee):
+    def __init__(self):
+        self.share=0
+        super().__init__()
+    def adddirector(self):
+        super().add()
+
+
+#PL
+def showdata(y):
+    if(y.type=="Manager"):
+        print('Manager number =',y.number,'\nManager area =',y.area,'\nManager ID =',y.id,'\nManager age =',y.age,'\nManager name =',y.name)
+    elif(y.type=="Trainer"):
+        print('Trainer course =', y.course, '\nTrainer ID =', y.id, '\nTrainer age =', y.age, '\nTrainer name =',y.name)
+    elif (y.type=="Director"):
+        print('Director share =', y.share, '\nDirector ID =', y.id, '\nDirector age =', y.age, '\nDirector name =',y.name)
+
+print('-----WELCOME TO EMPLOYEE RESOURCE PLANNING-----')
+while(1):
+    print('Press\n1. To add\n2. To search\n3. To delete\n4. To modify\n5. To display all\n6. exit')
+    ch = int(input('Enter your choice ='))
+    if (ch == 1):  # to add
+        print('Press\n1. For manager\n2. For trainer\n3. For director')
+        x = int(input('Enter your choice ='))
+        if(x==1):    # manager
+            man=manager()
+            man.number = input('Enter the manager number =')
+            man.area = input('Enter the manager area =')
+            man.id = input('Enter the manager id =')
+            man.age = input('Enter the manager age =')
+            man.name = input('Enter the manager name =')
+            man.type ="Manager"
+            man.addmanager()
+            print('-----MANAGER ADDED SUCCESSFULLY-----')
+        elif (x == 2):  # trainer
+            tra = trainer()
+            tra.course = input('Enter the course =')
+            tra.id = input('Enter the id =')
+            tra.age = input('Enter the age =')
+            tra.name = input('Enter the name =')
+            tra.type = "Trainer"
+            tra.addtrainer()
+            print('-----TRAINER ADDED SUCCESSFULLY-----')
+        elif (x == 3):  # director
+            dir = director()
+            dir.share = input('Enter the share =')
+            dir.id = input('Enter the id =')
+            dir.age = input('Enter the age =')
+            dir.name = input('Enter the name =')
+            dir.type = "Director"
+            dir.adddirector()
+            print('-----DIRECTOR ADDED SUCCESSFULLY-----')
+    elif(ch==2):    # search
+        id=input('Enter the ID =')
+        y=employee.search(id)
+        print('--------------------')
+        showdata(y)
+        print('--------------------')
+    elif(ch==3):    # delete
+        id=input('Enter the ID =')
+        flag=employee.delete(id)
+        if(flag==1):
+            print('-----EMPLOYEE DETAILS DELETED SUCCESSFULLY-----')
+        else:
+            print('-----GIVEN ID NOT FOUND-----')
+    # elif(ch==4):    # modify
+    #     id=input('Enter the ID =')
+    #     y=employee.modify(id)
+    #     if(y.type=="Manager"):
+    #         man=manager()
+    #         man.number = input('Enter the updated manager number =')
+    #         man.area = input('Enter the updated manager area =')
+    #         man.age = input('Enter the updated manager age =')
+    #         man.name = input('Enter the updated manager name =')
+    #         man.delmanager()
+    #    # elif(y.type=="Trainer"):
+    #     #elif (y.type=="Director"):
